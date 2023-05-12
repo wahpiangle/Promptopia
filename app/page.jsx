@@ -1,3 +1,5 @@
+import Feed from "@components/Feed"
+
 const Home = () => {
     return (
         <section className="w-full flex-center flex-col">
@@ -6,6 +8,7 @@ const Home = () => {
                 <span className="orange_gradient text-center">AI-Powered Prompts</span>
             </h1>
             <p className="desc text-center">Promptopia is a tool for people to discover, create and share creative prompts</p>
+            <Feed/>
         </section>
     )
 }
