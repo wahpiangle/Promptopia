@@ -33,6 +33,7 @@ const Nav = () => {
         <p className="logo_text">Promptopia</p>
       </Link>
       <div className="sm:flex hidden">
+        {/* If there is a user logged in, there will be value in session.user */}
         {session?.user ? (
           <div className="flex gap-3 md:gap-5">
             <Link href="/create-prompt" className="black_btn">
@@ -55,7 +56,7 @@ const Nav = () => {
           </div>
         ) : (
           <>
-            { //this is used to check if the user is logged in
+            { //this is used to check if the user is not logged in
               providers &&
               Object.values(providers).map((provider) => (
                 <button
@@ -80,7 +81,7 @@ const Nav = () => {
               src={session?.user?.image}
               width={37}
               height={37}
-              className="rounded-full"
+              className="rounded-full cursor-pointer"
               alt="profile"
               onClick={()=>setToggleDropdown((prev)=>!prev)}
             />
@@ -110,7 +111,7 @@ const Nav = () => {
                   onClick={() => signIn(provider.id)}
                   className="black_btn"
                 >
-                  Sign in with
+                  Sign In
                 </button>
               ))
             }
