@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect } from "react"
-import PromptCard from "./PromptCard"
+import { useState, useEffect, Suspense } from "react"
+import React from "react"
 
-const PromptCardList = ({ data, handleTagClick}) =>{
-  return(
+const PromptCardList = ({ data, handleTagClick }) => {
+  return (
     <div className="mt-16 prompt_layout">
-      {data.map((post)=>(
+      {data.map((post) => (
         <PromptCard
           key={post._id}
           post={post}
@@ -19,19 +19,19 @@ const PromptCardList = ({ data, handleTagClick}) =>{
 
 const Feed = () => {
   const [searchText, setSearchText] = useState('')
-  const [ posts, setPosts ] = useState([])
-  const handleSearchChange = (e) =>{
+  const [posts, setPosts] = useState([])
+  const handleSearchChange = (e) => {
 
   }
 
-  useEffect(()=>{
-    const fetchPosts = async() =>{
+  useEffect(() => {
+    const fetchPosts = async () => {
       const response = await fetch('/api/prompt')
       const data = await response.json()
       setPosts(data);
     }
     fetchPosts();
-  },[])
+  }, [])
 
   return (
     <section className="feed">
@@ -45,12 +45,16 @@ const Feed = () => {
           className="search_input peer"
         />
       </form>
-      <PromptCardList
-        data={posts}
-        handleTagClick={()=>{}}
-      />
+      <Suspense fallback={<span className="loader"></span>}>
+        <PromptCardList
+          data={posts}
+          handleTagClick={() => { }}
+        />
+      </Suspense >
     </section>
   )
 }
+
+const PromptCard = React.lazy(() => import("@components/PromptCard"));
 
 export default Feed
