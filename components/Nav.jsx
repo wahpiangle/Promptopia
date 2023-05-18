@@ -2,12 +2,11 @@
 
 import Link from "next/link"
 import Image from "next/image" //for automatic image optimization
-import { useState, useEffect } from "react"
+import { useState, useEffect, Suspense } from "react"
 import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
 
 const Nav = () => {
-  const { data:session } = useSession()
-
+  const { data: session } = useSession()
   const [providers, setProviders] = useState(null)
   const [toggleDropdown, setToggleDropdown] = useState(false)
 
@@ -83,7 +82,7 @@ const Nav = () => {
               height={37}
               className="rounded-full cursor-pointer"
               alt="profile"
-              onClick={()=>setToggleDropdown((prev)=>!prev)}
+              onClick={() => setToggleDropdown((prev) => !prev)}
             />
 
             {toggleDropdown && (
@@ -91,10 +90,10 @@ const Nav = () => {
                 <Link href="/profile" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
                   My Profile
                 </Link>
-                <Link href="/create-prompt" className="dropdown_link" onClick={()=> setToggleDropdown(false)}>
+                <Link href="/create-prompt" className="dropdown_link" onClick={() => setToggleDropdown(false)}>
                   Create Prompt
                 </Link>
-                <button type="button" onClick={() => {setToggleDropdown(false); signOut()}} className="mt-5 w-full black_btn">
+                <button type="button" onClick={() => { setToggleDropdown(false); signOut() }} className="mt-5 w-full black_btn">
                   Sign Out
                 </button>
               </div>

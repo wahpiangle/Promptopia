@@ -1,4 +1,5 @@
 import Feed from "@components/Feed"
+import { Suspense } from "react"
 
 const Home = () => {
     return (
@@ -8,7 +9,9 @@ const Home = () => {
                 <span className="orange_gradient text-center">AI-Powered Prompts</span>
             </h1>
             <p className="desc text-center">Promptopia is a tool for people to discover, create and share creative prompts</p>
-            <Feed/>
+            <Suspense fallback={<span className="loader"></span>}>
+                <Feed/>
+            </Suspense>
         </section>
     )
 }
