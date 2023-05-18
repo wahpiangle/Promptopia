@@ -11,12 +11,14 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
 
   const handleCopy = () => {
     setCopied(post.prompt)
-    navigator.clipboard.writeText(post.prompt);
+    navigator.clipboard.writeText(post.prompt); //copy to clipboard
     setTimeout(() => { setCopied("") }, 3000)
   }
 
   const handleProfileClick = () => {
+    //if the profile matches the current user, redirect to profile page
     if (post.creator._id === session?.user.id) return router.push("/profile");
+    //else redirect to the profile of the creator of the post
     router.push(`/profile/${post.creator._id}?name=${post.creator.username}`);
   };
 
